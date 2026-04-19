@@ -1,0 +1,7 @@
+{
+  "name": "SapaTamu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
