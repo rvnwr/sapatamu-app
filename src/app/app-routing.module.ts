@@ -11,11 +11,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'editor/:templateId',
+    loadChildren: () => import('./pages/editor/editor.module').then(m => m.EditorPageModule)
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { 
+      preloadingStrategy: PreloadAllModules 
+      // Pastikan TIDAK ADA useHash: true di sini
+    })
   ],
   exports: [RouterModule]
 })

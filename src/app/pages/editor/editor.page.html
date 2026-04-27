@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    <ion-button (click)="kembaliKeHome()">
+      <ion-icon slot="start" name="arrow-back"></ion-icon>
+        Kembali
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edit Undangan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label position="floating">Nama Mempelai Pria</ion-label>
+        <ion-input [(ngModel)]="dataUndangan.mempelaiPria" placeholder="Contoh: Ergyan"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Nama Mempelai Wanita</ion-label>
+        <ion-input [(ngModel)]="dataUndangan.mempelaiWanita" placeholder="Contoh: Nina"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full" id="open-date-input">
+        <ion-label position="floating">Tanggal Acara</ion-label>
+        <ion-input [value]="dataUndangan.tanggal" readonly placeholder="Pilih Tanggal"></ion-input>
+        <ion-icon name="calendar-outline" slot="end"></ion-icon>
+        
+        <ion-popover trigger="open-date-input" show-backdrop="false">
+          <ng-template>
+            <ion-datetime
+              presentation="date"
+              (ionChange)="formatDate($event)"
+              showDefaultButtons="true"
+              doneText="Pilih"
+              cancelText="Batal">
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Lokasi</ion-label>
+        <ion-input [(ngModel)]="dataUndangan.lokasi"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Pesan</ion-label>
+        <ion-textarea [(ngModel)]="dataUndangan.pesan"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" (click)="exportToPDF()" class="ion-margin-top">
+        <ion-icon name="download-outline" slot="start"></ion-icon>
+        Download PDF
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="text-align: center; margin: 20px; font-weight: bold; color: #666;">
+    PREVIEW UNDANGAN
+  </div>
+
+  <div class="preview-container" style="display: flex; justify-content: center; padding-bottom: 50px;">
+    <div #printContent [ngClass]="templateId" class="base-template">
+      <div class="content">
+        <h4 class="title-top">THE WEDDING OF</h4>
+        
+        <div class="couple-names">
+          <h1 class="name">{{ dataUndangan.mempelaiPria || 'Pria' }}</h1>
+          <span class="and-symbol">&</span>
+          <h1 class="name">{{ dataUndangan.mempelaiWanita || 'Wanita' }}</h1>
+        </div>
+        
+        <div class="info-box">
+          <p>📅 {{ dataUndangan.tanggal || '-' }}</p>
+          <p>📍 {{ dataUndangan.lokasi || '-' }}</p>
+        </div>
+
+        <p class="message">{{ dataUndangan.pesan }}</p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

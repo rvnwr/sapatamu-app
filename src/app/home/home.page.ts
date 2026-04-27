@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Gunakan Router
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
+  constructor(private router: Router) {} // Injeksi Router
 
-  constructor() {}
-
+  pilihTemplate(id: string) {
+    // Navigasi kasar lewat URL browser langsung
+    window.location.href = '/editor/' + id;
+  }
 }
